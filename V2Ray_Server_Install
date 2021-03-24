@@ -1,0 +1,75 @@
+<?php
+
+#### This is install V2Ray Server and setting config Description ####
+
+---------------------------------------------------------------------------------------------------------------------------------------------------
+
+# 會用到下列套件與環境，可以先安裝配置 #
+# yum install wget git
+# systemctl disable firewalld
+# systemctl stop firewalld
+
+
+# 測速
+# wget -O speedtest-cli https://raw.githubusercontent.com/sivel/speedtest-cli/master/speedtest.py --no-check-certificate 
+# chmod +x speedtest-cli
+# ./speedtest-cli
+
+# 關閉 Selinux
+# sed -i 's/enforcing/disabled/g' /etc/selinux/config /etc/selinux/config
+
+# 安裝BBRPlus
+# wget -N --no-check-certificate "https://github.000060000.xyz/tcp.sh" && chmod +x tcp.sh && ./tcp.sh
+
+# 重新啟動
+# reboot
+
+# 重啟後，開啟 tcp.sh 腳本，安裝加速，可以能還重啟一次。
+# ./tcp.sh
+
+# 與阿里雲同步時間 (上海)
+# yum install ntpdate
+# timedatectl set-timezone Asia/Shanghai
+# ntpdate ntp1.aliyun.com
+
+# 如果不行也可以選擇與 Centos 同步時間 (上海)
+# yum install netdate
+# timedatectl set-timezone Asia/Shanghai
+# ntpdate pool.ntp.org
+
+# 安裝並啟動 Docker/Docker-Compose。
+# curl -fsSL https://get.docker.com | bash
+# curl -L "https://github.com/docker/compose/releases/download/1.25.3/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+# chmod a+x /usr/local/bin/docker-compose
+# rm -f `which dc`
+# ln -s /usr/local/bin/docker-compose /usr/bin/dc
+
+# 啟動 Docker 、 開機啟動 Docker 、 Docker 目前狀態
+# systemctl start docker
+# systemctl enable docker.service
+# systemctl status docker.service
+
+# 如果 Docker 出現錯誤可以嘗試以下查閱方式
+# systemctl status docker.service
+# 或是
+# dockerd
+
+# 如果 Docker 可能是 Kernal 出現錯誤可以嘗試以下方式。
+# rm /etc/docker/key.json 
+# rm -rf /var/lib/docker
+
+# 獲取後端
+# git clone https://github.com/ColetteContreras/v2ray-poseidon.git
+
+# 配置 Config 、 Yml
+# cd /root/v2ray-poseidon/docker/sspanel/ws-tls
+# vi config.json
+# vi docker-compose.yml
+
+# 用軟連並在背景啟動 Docker 
+# dc up -d
+
+# 可查看Log 
+# dc logs
+
+?>
